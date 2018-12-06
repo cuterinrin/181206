@@ -4,7 +4,6 @@
 	typedef	struct link{ //typedef사용해서 이 것들을 한 단어로 대체 가능 
 		
 		int data;
-		
 		void *next;//중요 
 		//or struct link *next; - 자기자신 가리키기 
 	} link_ty;
@@ -16,15 +15,17 @@
 	
 	link_ty* create_node(int value)//노드 생성 함수, 포인터 선언 
 	{
-	link_ty* ndptr;
-	//동적 메모리 할당 - 함수 맬록(구조체 크기)) 
-	ndptr = (link_ty*)malloc( sizeof(link_ty) );//명시적 형변환, sizeof함수 = link_ty의 크기
-	//오류 핸들링, 런타임 에러 방지 
-	if (ndptr == NULL)
-	{
-		printf("error!\n");
-		return NULL;
-	 } 
+		{
+			link_ty* ndptr;
+			//동적 메모리 할당 - 함수 맬록(구조체 크기)) 
+			ndptr = (link_ty*)malloc( sizeof(link_ty) );//명시적 형변환, sizeof함수 = link_ty의 크기
+			//오류 핸들링, 런타임 에러 방지 
+			if (ndptr == NULL)
+			{printf("error!\n");
+			}
+			
+			return NULL;
+		 } 
 	//정수값 저장 
 	ndptr->data = value;
 	ndptr->next = NULL; //중요 
@@ -33,3 +34,23 @@
 	
 	}
 	
+	//다음 파일 가리키기
+	
+	void addtail(int value){
+		link_ty *ndptr, *newptr; //가리키는 포인터 변수 필요 
+
+	if (list == NULL)//오류나면 안돼 
+	{return;
+	} 
+	else
+	{
+		ndptr = list;
+		while (ndptr->next != NULL){
+			ndptr = ndptr->next;
+		}
+	}
+		
+		newptr = create_node(value); //새로운 포인터에 생성 노드를 대입 
+		ndptr->next = newptr; //노드포인터가 가리키는 다음 = 뉴포인터 
+		
+	} 
